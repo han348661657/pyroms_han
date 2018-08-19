@@ -1,0 +1,69 @@
+Here are some examples of using the pyroms package (plus maybe a few      以下是使用pyroms包的一些示例（可能还有一些
+plain python examples).                                                   普通的python例子）。
+                                                                          
+For those of us who don't have the grid information in every ROMS         对于我们这些在每个ROM中都没有网格信息的人
+output file, the gridid.txt file here is used to provide some             输出文件，这里的gridid.txt文件用于提供一些
+information to pyroms about our grids. Point to it with the               有关我们网格的信息。用它指向它
+PYROMS_GRIDID_FILE environment variable.                                  PYROMS_GRIDID_FILE环境变量。
+                                                                          
+************************************************************************  ************************************************** **********************
+*** For all the interpolating, run the make_weight_files.py script   ***  ***对于所有插值，运行make_weight_files.py脚本***
+*** first. Also, make sure all the files have the same               ***  ***首先。另外，确保所有文件都具有相同的***
+*** irange,jrange,ystart for your specific domain.                   ***  *** irange，jrange，ystart为您的特定域名。 ***
+************************************************************************  ************************************************** **********************
+                                                                          
+INTERPOLATING FROM SODA:                                                  从SODA插入：
+                                                                          
+   The Yellow_Sea directory contains code for creating a grid,               Yellow_Sea目录包含用于创建网格的代码，
+   bathymetry, initial and boundary files (the last from SODA,               测深，初始和边界文件（最后来自SODA，
+   http://www.atmos.umd.edu/~ocean/).                                        http://www.atmos.umd.edu/~ocean/）。
+                                                                          
+   The Arctic2 directory has code for interpolating from SODA across all     Arctic2目录包含用于从所有SODA插值的代码
+   longitudes. It also shows how to use multiprocessing for the boundary     经度。它还说明了如何对边界使用多处理
+   conditions and climatology files - be sure to set the number of process   条件和气候学文件 - 务必设置进程数es
+   desired.                                                                  期望。
+                                                                          
+   Added a couple of SODA3 examples, but the Arctic isn't working yet.       添加了几个SODA3示例，但北极还没有工作。
+                                                                          
+INTERPOLATING FROM LARGER ROMS DOMAINS:                                   从更大的ROMS域中插入：
+                                                                          
+   For creating initial and boundary files from larger ROMS grids,           要从较大的ROMS网格创建初始和边界文件，
+   there are two cases:                                                      有两种情况：
+                                                                          
+   1. Where the small grid is aligned with the large grid, no velocity       1.小网格与大网格对齐，没有速度
+   rotation needed. See the Bering directory.                                需要轮换。请参阅Bering目录。
+                                                                          
+   2. Where the grids are not aligned and velocities need to be rotated.     2.网格未对齐且速度需要旋转。
+   See the Beaufort example. The ice boundary script uses multiprocessing,   见博福特的例子。冰边界脚本使用多处理，
+   by month.                                                                 按个月计算。
+                                                                          
+   These all depend on pyroms_toolbox/remapping*.py.                         这些都取决于pyroms_toolbox / remapping * .py。
+                                                                          
+INTERPOLATING FROM GLOBAL HYCOM:                                          从全球HYCOM插话：
+                                                                          
+    Scripts in Arctic_HYCOM - scripts to get the HYCOM files                  Arctic_HYCOM中的脚本 - 获取HYCOM文件的脚本
+    (subsets of the global fields) and scripts to interpolate from them.      （全局字段的子集）和从中插入的脚本。
+                                                                          
+    Also Palau_HYCOM shows how to do a non-polar subset of the HYCOM          Palau_HYCOM也展示了如何做HYCOM的非极性子集
+    files.                                                                    文件。
+                                                                          
+INTERPOLATING FROM GLOBAL RUNOFF:                                         从全球运输中插入：
+                                                                          
+    Scripts in Arctic_runoff were used to convert from Dai and Trenberth      Arctic_runoff中的脚本被用来转换为戴和Trenberth
+    global runoff to the ROMS coastal regions (like a second rain, but fro    全球径流到ROMS沿海地区（就像第二场雨，但来自m
+    rivers).                                                                  河流）。
+                                                                          
+RIVERS:                                                                   河流：
+                                                                          
+    The rivers directory has stuff for turning ARDAT (Arctic Rivers)          河流目录有转动ARDAT（北极河流）的东西
+    into ROMS sources.                                                        进入ROMS来源。
+                                                                          
+NESTING:                                                                  嵌套：
+                                                                          
+    So far the nesting directory has only tools for processing the            到目前为止，嵌套目录只有用于处理的工具
+    ocean_xx.in files, merging them for nested grid domains.                  ocean_xx.in文件，将它们合并为嵌套网格域。
+                                                                          
+BOUNDARY CONDITIONS FROM A STATIONS FILE:                                 来自一个站文件的边界条件：
+                                                                          
+    BC_from_sta contains one rough stab at this. Work to be done on           BC_from_sta包含一个粗略的刺。要做的工作
+    volume transports.                                                        批量运输。
